@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {TodoItem} from "../todo-item";
 import {Model} from "../model.model";
 
 @Component({
@@ -8,6 +7,20 @@ import {Model} from "../model.model";
   styleUrl: './todo.component.css'
 })
 export class TodoComponent {
+  message = "";
+
+  /*addItem(input: any) {
+    console.log(input.value);
+  }*/
+
+  addItem(value: string) {
+    if (value !== '') {
+      this.model.items.push({description: value, action: 'no'});
+    } else {
+      alert('Field cannot be empty');
+    }
+  }
+
   model = new Model();
 
   getName() {
