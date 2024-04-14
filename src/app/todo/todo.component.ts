@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {TodoItem} from "../todo-item";
+import {Model} from "../model.model";
 
 @Component({
   selector: 'todo',
@@ -6,22 +8,13 @@ import {Component} from '@angular/core';
   styleUrl: './todo.component.css'
 })
 export class TodoComponent {
-  private name = 'Jalil';
-  items = [{
-    id: 1,
-    description: 'Breakfast',
-    action: 'yes'
-  }, {
-    id: 2,
-    description: 'Workout',
-    action: 'yes'
-  }, {
-    id: 3,
-    description: 'Shopping',
-    action: 'no'
-  }]
+  model = new Model();
 
   getName() {
-    return this.name;
+    return this.model.name;
+  }
+
+  getItems() {
+    return this.model.items;
   }
 }
