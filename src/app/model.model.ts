@@ -8,19 +8,19 @@ export class Model {
     this.name = 'Jalil';
     this.items = [{
       description: 'Breakfast',
-      action: 'yes'
+      action: true
     }, {
       description: 'Workout',
-      action: 'yes'
+      action: true
     }, {
       description: 'Shopping',
-      action: 'no'
+      action: false
     }, {
       description: 'Shopping',
-      action: 'yes'
+      action: true
     }, {
       description: 'Shopping',
-      action: 'no'
+      action: false
     }];
   }
 }

@@ -7,15 +7,11 @@ import {Model} from "../model.model";
   styleUrl: './todo.component.css'
 })
 export class TodoComponent {
-  message = "";
-
-  /*addItem(input: any) {
-    console.log(input.value);
-  }*/
+  displayAll: boolean = false;
 
   addItem(value: string) {
     if (value !== '') {
-      this.model.items.push({description: value, action: 'no'});
+      this.model.items.push({description: value, action: false});
     } else {
       alert('Field cannot be empty');
     }
@@ -28,6 +24,9 @@ export class TodoComponent {
   }
 
   getItems() {
-    return this.model.items;
+    if (this.displayAll) {
+      return this.model.items;
+    }
+    return this.model.items.filter(item => !item.action);
   }
 }
