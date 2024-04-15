@@ -16,51 +16,71 @@
           Show All
         </label>
       </div>
-      <table class="table table-bordered" *ngIf="getItems().length > 0">
-        <thead>
-        <tr>
-          <th></th>
-          <th>
-            Description
-          </th>
-          <th>
-            Action
-          </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of getItems(); let i = index">
-          <td>
-            {{ i + 1 }}
-          </td>
-          <td>
-            {{ item.description }}
-          </td>
-          <td>
-            <!--<div *ngIf="item.action">
-              Yes
-            </div>
-            <div *ngIf="!item.action">
-              No
-            </div>-->
-            <div [ngSwitch]="item.action">
-              <div *ngSwitchCase="true">
+      <div class="my-2">
+        {{ displayCount() }} task(s) completed
+      </div>
+      <div class="alert alert-warning" *ngIf="getItems().length == 0 else table">
+        All tasks have been completed.
+      </div>
+      <ng-template #table>
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th></th>
+            <th>
+              Description
+            </th>
+            <th>
+              Action
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of getItems(); let i = index">
+            <td>
+              {{ i + 1 }}
+            </td>
+            <td>
+              {{ item.description }}
+            </td>
+            <td>
+              <!--<div [ngSwitch]="item.action">
+                <div *ngSwitchCase="true">
+                  Yes
+                </div>
+                <div *ngSwitchDefault>
+                  No
+                </div>
+              </div>-->
+              <!--<div *ngIf="item.action; else no">
                 Yes
               </div>
-              <div *ngSwitchDefault>
+              <ng-template #no>
                 No
+              </ng-template>-->
+              <!--<div *ngIf="item.action; then no">
+                Hidden
               </div>
-            </div>
-          </td>
-          <td>
-            <input type="checkbox" [(ngModel)]="item.action"/>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      <div class="alert alert-warning" *ngIf="getItems().length == 0">
-        Empty list.
-      </div>
+              <ng-template #no>
+                No
+              </ng-template>-->
+              <div *ngIf="item.action; then yes else no">
+                Hidden
+              </div>
+              <ng-template #no>
+                No
+              </ng-template>
+              <ng-template #yes>
+                Yes
+              </ng-template>
+            </td>
+            <td>
+              <input type="checkbox" [(ngModel)]="item.action"/>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </ng-template>
     </div>
   </div>
 </div>
