@@ -5,8 +5,8 @@
         {{ getName() }}'s List
       </h3>
       <div class="input-group mb-3">
-        <input type="text" #input class="form-control" (keyup.enter)="addItem(input.value); input.value='';"/>
-        <button class="btn btn-outline-primary" (click)="addItem(input.value); input.value='';">
+        <input type="text" class="form-control" (keyup.enter)="addItem()" [(ngModel)]="inputText"/>
+        <button class="btn" (click)="addItem()" [class]="getBtnClasses()">
           Add
         </button>
       </div>
@@ -36,7 +36,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of getItems(); let i = index">
+          <tr *ngFor="let item of getItems(); let i = index"
+              [class]="{'table-success': item.action, 'table-warning': !item.action}">
             <td>
               {{ i + 1 }}
             </td>
@@ -44,26 +45,6 @@
               {{ item.description }}
             </td>
             <td>
-              <!--<div [ngSwitch]="item.action">
-                <div *ngSwitchCase="true">
-                  Yes
-                </div>
-                <div *ngSwitchDefault>
-                  No
-                </div>
-              </div>-->
-              <!--<div *ngIf="item.action; else no">
-                Yes
-              </div>
-              <ng-template #no>
-                No
-              </ng-template>-->
-              <!--<div *ngIf="item.action; then no">
-                Hidden
-              </div>
-              <ng-template #no>
-                No
-              </ng-template>-->
               <div *ngIf="item.action; then yes else no">
                 Hidden
               </div>

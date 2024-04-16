@@ -8,10 +8,12 @@ import {Model} from "../model.model";
 })
 export class TodoComponent {
   displayAll: boolean = false;
+  inputText: string = '';
 
-  addItem(value: string) {
-    if (value !== '') {
-      this.model.items.push({description: value, action: false});
+  addItem() {
+    if (this.inputText !== '') {
+      this.model.items.push({description: this.inputText, action: false});
+      this.inputText = '';
     } else {
       alert('Field cannot be empty');
     }
@@ -32,5 +34,13 @@ export class TodoComponent {
 
   displayCount() {
     return this.model.items.filter(item => item.action).length;
+  }
+
+  getBtnClasses() {
+    return {
+      'disabled': this.inputText.length == 0,
+      'btn-outline-secondary': this.inputText.length == 0,
+      'btn-outline-primary': this.inputText.length > 0
+    }
   }
 }
